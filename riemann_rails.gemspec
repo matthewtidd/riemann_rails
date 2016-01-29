@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name = "riemann_rails"
-	s.version = "0.0.0"
+	s.version = "0.0.1"
 	s.date = "2016-01-28"
 	s.summary = "Riemann Rails"
 	s.description = "Gem for integrating riemann in to rails"

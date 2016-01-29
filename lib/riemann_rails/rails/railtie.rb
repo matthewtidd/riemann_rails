@@ -111,7 +111,7 @@ module RiemannRails
 				event.merge! data
 				puts "RIEMANN DATA = #{event}"
 				event[:description] = description if description
-				if @@transport == :tcp
+				if @@transport == :tcp || event[:description]
 					@@client.tcp << event
 				else
 					@@client << event
