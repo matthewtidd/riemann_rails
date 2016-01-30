@@ -68,7 +68,6 @@ module RiemannRails
 				@@ttl = app_cfg.ttl
 				@@transport = app_cfg.transport
 				@@hostname = get_hostname
-				puts "CONNECTING TO RIEMANN - #{app_cfg.host} #{app_cfg.port}"
 				@@client = Riemann::Client.new(:host => app_cfg.host, :port => app_cfg.port)
 			end
 
