@@ -23,16 +23,21 @@ module RiemannRails
 			# @param [Exception] exception
 			# @return [Riemann::Notice] the notice with extra information
 			def build_notice(exception)
-				name = "#{@controller.controller_name}.#{@controller.action_name}"
+				name = "exception"
+				if @controller
+					name = "#{@controller.controller_name}.#{@controller.action_name}"
+				end
 				description = [exception.to_s, exception.backtrace].join("\n")
 				data = {}
 
-				params = @request.env['action_dispatch.request.parameters']
-				data[:params] = params if params
-				data[:url] = @request.url
-				if @request.env["action_controller.instance"] && @request.env["action_controller.instance"].current_user
-					user = @request.env["action_controller.instance"].current_user
-					data[:user] = "#{user.id}/#{user.login}"
+				if @request
+					params = @request.env['action_dispatch.request.parameters']
+					data[:params] = params if params
+					data[:url] = @request.url
+					if @request.env["action_controller.instance"] && @request.env["action_controller.instance"].current_user
+						user = @request.env["action_controller.instance"].current_user
+						data[:user] = "#{user.id}/#{user.login}"
+					end
 				end
 
 				RiemannRails::Rails::Railtie.post(["rails", "exception"], "exception", 1, name, description, data)
