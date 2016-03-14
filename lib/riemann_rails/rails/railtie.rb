@@ -111,7 +111,10 @@ module RiemannRails
 				puts "RIEMANN DATA = #{event}"
 				event[:description] = description if description
 				if @@transport == :tcp || event[:description]
-					@@client.tcp << event
+					begin
+						@@client.tcp << event
+					rescue Riemann::Client::TcpSocket::Error
+					end
 				else
 					@@client << event
 				end
