@@ -108,7 +108,6 @@ module RiemannRails
 					service: "#{@@service_name}.#{service}"
 				}
 				event.merge! data
-				puts "RIEMANN DATA = #{event}"
 				event[:description] = description if description
 				if @@transport == :tcp || event[:description]
 					begin
