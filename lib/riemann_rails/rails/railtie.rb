@@ -113,6 +113,7 @@ module RiemannRails
 					begin
 						@@client.tcp << event
 					rescue Riemann::Client::TcpSocket::Error
+					rescue SocketError
 					end
 				else
 					@@client << event
