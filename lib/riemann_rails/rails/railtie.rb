@@ -112,6 +112,7 @@ module RiemannRails
 				if @@transport == :tcp || event[:description]
 					begin
 						@@client.tcp << event
+					rescue Errno::ETIMEDOUT
 					rescue Riemann::Client::TcpSocket::Error
 					rescue SocketError
 					end
