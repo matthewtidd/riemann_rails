@@ -96,6 +96,7 @@ module RiemannRails
 				self.post (tags.dup << 'request_runtime'), state, self.total_time(start, finish), "#{service_name}.total_time", nil, data
 				self.post (tags.dup << 'db_runtime'), state, payload[:db_runtime], "#{service_name}.db_runtime", nil, data
 				self.post (tags.dup << 'sap_runtime'), state, payload[:sap_runtime], "#{service_name}.sap_runtime", nil, data
+				self.post (tags.dup << 'elastic_search_runtime'), state, payload[:elastic_search_runtime], "#{service_name}.elastic_search_runtime", nil, data
 			end
 
 			def self.post(tags, state, metric, service='', description=nil, data = {})
